@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <%= t.include("partials/_head.html", grunt.data.json) %>
+    <% if (json.project.production && !json.project.embedded) { %>
+      <%= t.include("partials/_dataLayer.html") %>
+      <%= t.include("partials/_gtm.html") %>
+    <% } %>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <% if (json.project.production && !json.project.embedded) { %>
+      <%= t.include("partials/_gtmNoScript.html") %>
+    <% } %>
+    <responsive-child class="interactive">
+
+      <div class="graphic-hed">Positive coronavirus test rates as high as 28% in parts of King County</div>
+
+      <div class="graphic-chatter">Of the more than 61,000 King County residents tested for coronavirus from Nov. 7-21, 8,900 (14.5%) were positive
+        for the virus. In South Auburn, the positive-test rate hit 28%. In many parts of the county, rates are at an all-time high.</div>
+
+        <div style="text-align:center; margin-top: 15px;"><i>Click on a region below to see more details</i></div>
+      <!-- content goes here -->
+      <div class="buttonCon">
+        <!-- <div id="cases" class="button">Total cases</div> -->
+        <div id="tests_pos" class="button">Positivity rates Nov. 7 - Nov. 21</div>
+        <div id="pos_change" class="button">Percentage point change from previous two-week period</div>
+      </div>
+
+      <div id="legendCon">
+        <div class="decrease hide">
+          <div class="legend">
+            <div class="color"></div>
+            <div class="number">
+              <span class="pos_change">0.1 to 5.0</span>
+              <span class="tests_pos">5-9.9%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend">
+          <div class="color"></div>
+          <div class="number">
+            <span class="pos_change">5.1 to 10.0</span>
+            <span class="tests_pos">10.0-14.9%</span>
+          </div>
+        </div>
+
+
+
+      <div class="increase hide">
+        <div class="legend">
+          <div class="color"></div>
+          <div class="number">
+            <span class="pos_change">10.1 to 15.0</span>
+            <span class="tests_pos">15.0-19.9%</span>
+          </div>
+        </div>
+
+
+        <div class="legend">
+          <div class="color"></div>
+          <div class="number">
+            <span class="pos_change">15.1 +</span>
+            <span class="tests_pos">20.0-24.9%</span>
+          </div>
+        </div>
+
+        <div class="legend">
+          <div class="color lastBlock"></div>
+          <div class="number">
+            <span class="tests_pos">25.0% +</span>
+          </div>
+        </div>
+
+
+        <!-- <div class="legend">
+          <div class="color lastBlock"></div>
+          <div class="number">
+            <span class="pos_change">9.1 +</span>
+          </div>
+        </div> -->
+      </div>
+
+    </div>
+
+      <div id="map" class="aspect-ratio-outer">
+        <div class="aspect-ratio-inner">
+
+          <leaflet-map zoom=9>
+            <tile-layer layer="cartoPositron"></tile-layer>
+          </leaflet-map>
+
+        </div>
+      </div>
+
+      <figcaption class="source-container">
+          <p class="data-source">Source: Public Health - Seattle & King County. Data from Nov. 21, 2020.</p>
+          <p class="art-credit">Lauren Flannery / The Seattle Times</p>
+      </figcaption>
+
+
+    </responsive-child>
+
+    <script src="app.js" async></script>
+    <% if (json.project.production) { %>
+    <%= !json.project.embedded ? t.include("partials/_analytics.html") : "" %>
+    <%= t.include("partials/_workHere.html") %>
+    <% } %>
+  </body>
+</html>
